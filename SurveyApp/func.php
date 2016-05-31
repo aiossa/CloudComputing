@@ -4,39 +4,43 @@ session_start();
 define ('FILE_NAME', __DIR__.'/questions.json');
 define ('FILE_RESULTS', __DIR__.'/results.json');
 
+global $lang;
+$lang = @$_GET['lang'];
+$lang = $lang ?: 'en';
+
 function isJson($string) {
     json_decode($string);
     return (json_last_error() === JSON_ERROR_NONE);
 }
 
-function getQuestionBody($question) {
+function getQuestionBody($name, $question) {
     $result = '';
     switch ($question['type']) {
         case 'radio':
-            return getRadioQuestion($question);
+            return getRadioQuestion($name, $question);
         case 'dropdown':
-            return getDropdownQuestion($question);
+            return getDropdownQuestion($name, $question);
         case 'rating':
-            return getRatingQuestion($question);
+            return getRatingQuestion($name, $question);
         case 'text':
-            return getTextQuestion($question);
+            return getTextQuestion($name, $question);
     }
     return $result;
 }
 
-function getRadioQuestion($question) {
+function getRadioQuestion($name, $question) {
     global $lang;
     $result = $question['question'][$lang].':&nbsp;';
     foreach ($question['variants'] as $value => $tag) {
         $result .= <<<INPUT
-{$tag[$lang]} <input type="radio" name="{$question['name']}" value="{$value}">&nbsp;
+{$tag[$lang]} <input type="radio" name="{$name}" value="{$value}">&nbsp;
 INPUT;
     }
 
     return $result;
 }
 
-function getDropdownQuestion($question) {
+function getDropdownQuestion($name, $question) {
     global $lang;
     $result = '';
     foreach ($question['variants'] as $value => $tag) {
@@ -45,23 +49,23 @@ function getDropdownQuestion($question) {
         <option value="{$value}">{$tag}</option>
 INPUT;
     }
-    return $question['question'][$lang].':&nbsp;<select name="'.$question['name'].'">'.$result.'</select>';
+    return $question['question'][$lang].':&nbsp;<select name="'.$name.'">'.$result.'</select>';
 }
 
-function getRatingQuestion($question) {
+function getRatingQuestion($name, $question) {
     global $lang;
     return <<<RESULT
 {$question['question'][$lang]}<br/>
-<input id="input-id" name="{$question['name']}" type="number" class="rating" min=1 max={$question['variants']} step=1 data-size="lg" data-rtl="true">
+<input id="input-id" name="{$name}" value=10 type="number" class="rating" min=1 max={$question['variants']} step=1 data-size="lg" data-rtl="true">
 RESULT;
 }
 
-function getTextQuestion($question) {
+function getTextQuestion($name, $question) {
 
     global $lang;
     $result = $question['question'][$lang].'<br/>';
     $result .= <<<INPUT
-    <textarea name="{$question['name']}"></textarea>
+    <textarea name="{$name}"></textarea>
 INPUT;
 
     return $result;

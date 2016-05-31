@@ -1,16 +1,12 @@
 <?php
 include_once __DIR__.'/func.php';
 
-global $lang;
-$lang = @$_GET['lang'];
-$lang = $lang ?: 'en';
-
 if (array_key_exists('ok', $_POST)) {
     //append to file
     $data = '';
     if (file_exists(FILE_RESULTS)) {
         $data = file_get_contents(FILE_RESULTS);
-        $data .= "\r\n";
+        $data .= PHP_EOL;
     }
     $result = json_encode($_POST, JSON_UNESCAPED_UNICODE);
     $data .= $result;
@@ -27,8 +23,8 @@ if (array_key_exists('ok', $_POST)) {
 $data = json_decode(file_get_contents(FILE_NAME), true);
 $label = $lang == 'ru' ? 'Язык' : 'Language';
 $body = $label . ': <a href="/?lang=ru">Русский</a> | <a href="/?lang=en">English</a>';
-foreach ($data as $question) {
-    $body .= '<br/>'.getQuestionBody($question);
+foreach ($data as $name => $question) {
+    $body .= '<br/>'.getQuestionBody($name, $question);
 }
 ?>
 
