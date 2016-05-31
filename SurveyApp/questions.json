@@ -1,0 +1,74 @@
+[
+	{
+		"type" : "radio",
+		"question" : {
+			"ru": "Укажите Ваш пол", 
+			"en": "Choose your sex"
+		},
+		"variants" : {
+		   "m": {
+		   		"ru" : "Мужчина", 
+		   		"en" : "Male"
+		   	},
+		   	"f" : {
+		   		"ru" : "Женщина", 
+		   		"en" : "Female"
+		   	}
+		},
+		"name": "sex"
+	},
+	{
+		"type" : "dropdown",
+		"question" : {
+			"ru": "Укажите Ваш возраст", 
+			"en": "Choose your age"
+		},
+		"variants" : [
+			"<18", "18-25", "25-35", ">35"
+		],
+		"name": "age"
+	},
+	{
+		"type" : "rating",
+		"question" : {
+			"ru": "Оцените дизайн текущей страницы", 
+			"en": "Estimate usability of page design"
+		},
+		"variants" : 10,
+		"name": "design"
+	},
+	{
+		"type" : "radio",
+		"question" : {
+			"ru": "Какой логотип Вам больше нравится",
+			"en": "Which logo do you prefer"
+		},
+		"variants" : {
+		   "1": {
+		   		"ru" : "СКБ Контур", 
+		   		"en" : "SKB Kontur"
+		   	},
+		   	"2" : {
+		   		"ru" : "Иннополис", 
+		   		"en" : "Innopolis"
+		   	},
+		   	"3" : {
+		   		"ru" : "Оба", 
+		   		"en" : "Like both of them"
+		   	},
+		   	"4" : {
+		   		"ru" : "Ни один", 
+		   		"en" : "None of them"
+		   	}
+		},
+		"name": "logo"
+	},
+	{
+		"type" : "text",
+		"question" : {
+			"ru": "Дополнительный комментарий", 
+			"en": "Additional comment"
+		},
+		"name": "comment"
+	}
+]
