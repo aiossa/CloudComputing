@@ -22,22 +22,35 @@ if (array_key_exists('ok', $_POST)) {
 }
 $data = json_decode(file_get_contents(FILE_NAME), true);
 $label = $lang == 'ru' ? 'Язык' : 'Language';
-$body = $label . ': <a href="/?lang=ru">Русский</a> | <a href="/?lang=en">English</a>';
+$body = '<label class="control-label">'.$label .'</label>'. ': <label class="control-label"><a href="/?lang=ru">Русский</a></label> | <label class="control-label"><a href="/?lang=en">English</a></label>';
 foreach ($data as $name => $question) {
-    $body .= '<br/>'.getQuestionBody($name, $question);
+    $body .= getQuestionBody($name, $question);
 }
 ?>
 
 <html>
 <head>
-
+    <meta charset="utf-8">
+<!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/docs.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container bs-docs-container"> 
 <form method="POST" action="">
     <?php echo $body; ?>
     <br/>
-    <input type="submit" value="OK" name="ok">
-</form>
+    <input class="btn btn-success" type="submit" value="OK" name="ok">
+</form> 
+</div>
 </body>
 </html>
 

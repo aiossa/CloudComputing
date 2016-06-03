@@ -30,14 +30,15 @@ function getQuestionBody($name, $question) {
 
 function getRadioQuestion($name, $question) {
     global $lang;
-    $result = $question['question'][$lang].':&nbsp;';
+    $result =  '<label class="control-label">'.$question['question'][$lang].':</label>&nbsp;' ;
     foreach ($question['variants'] as $value => $tag) {
         $result .= <<<INPUT
-{$tag[$lang]} <input type="radio" name="{$name}" value="{$value}">&nbsp;
+<div class="radio"><label><input type="radio" name="{$name}" value="{$value}"> {$tag[$lang]} </label>
+</div> 
 INPUT;
     }
 
-    return $result;
+    return '<div class="controls">'.$result.'</div>' ;
 }
 
 function getDropdownQuestion($name, $question) {
@@ -46,27 +47,28 @@ function getDropdownQuestion($name, $question) {
     foreach ($question['variants'] as $value => $tag) {
         $tag = isset($tag[$lang]) ? $tag[$lang] : $tag;
         $result .= <<<INPUT
-        <option value="{$value}">{$tag}</option>
+        <option value="{$value}">{$tag[$lang]}</option>
 INPUT;
     }
-    return $question['question'][$lang].':&nbsp;<select name="'.$name.'">'.$result.'</select>';
+    return '<label class="control-label">'.$question['question'][$lang].':</label>&nbsp;<select class="input-xlarge" name="'.$name.'">'.$result.'</select>';
 }
 
 function getRatingQuestion($name, $question) {
     global $lang;
     return <<<RESULT
-{$question['question'][$lang]}<br/>
-<input id="input-id" name="{$name}" value=10 type="number" class="rating" min=1 max={$question['variants']} step=1 data-size="lg" data-rtl="true">
+<div class="component"><div class="control-group"><label class="control-label">{$question['question'][$lang]}</label><br/>
+<input id="input-id"  name="{$name}" value=10 type="number" class="rating" min=1 max={$question['variants']} step=1 data-size="lg" data-rtl="true">
+</div></div>
 RESULT;
 }
 
 function getTextQuestion($name, $question) {
 
     global $lang;
-    $result = $question['question'][$lang].'<br/>';
+    $result = '<label class="control-label">'.$question['question'][$lang].'</label>';
     $result .= <<<INPUT
-    <textarea name="{$name}"></textarea>
+    <div class="controls"><textarea name="{$name}"></textarea></div>
 INPUT;
 
-    return $result;
+    return '<div class="component"><div class="control-group">'.$result.'</div></div>';
 }
