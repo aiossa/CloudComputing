@@ -32,16 +32,20 @@ foreach ($data as $name => $question) {
 <head>
     <meta charset="utf-8">
 <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="/css/docs.min.css" rel="stylesheet">
+	<link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 	
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
-	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="css/docs.min.css" rel="stylesheet">
+	<!--,<link href="/css/theme-krajee-svg.css" media="all" rel="stylesheet" type="text/css" />-->
+ 
+	
 </head>
 <body>
 <div class="container bs-docs-container"> 
@@ -51,6 +55,9 @@ foreach ($data as $name => $question) {
     <input class="btn btn-success" type="submit" value="OK" name="ok">
 </form> 
 </div>
+	<script src="/js/jquery-2.2.4.js"></script>
+	<script src="/js/star-rating.js"></script>
+	<script src="/js/star-rating_locale_<?php global $lang; echo $lang;?>.js"></script>
 </body>
 </html>
 

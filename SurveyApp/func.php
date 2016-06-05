@@ -58,7 +58,7 @@ function getRatingQuestion($name, $question) {
     global $lang;
     return <<<RESULT
 <div class="component"><div class="control-group"><label class="control-label">{$question['question'][$lang]}</label><br/>
-<input id="input-id"  name="{$name}" value=10 type="number" class="rating" min=1 max={$question['variants']} step=1 data-size="lg" data-rtl="true">
+<input id="input-id" name="{$name}" class="rating" value=10 type="number" class="rating" data-language="{$lang}" min=0 max={$question['variants']} step=1 data-size="lg" data-stars="{$question['variants']}">
 </div></div>
 RESULT;
 }
