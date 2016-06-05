@@ -48,7 +48,7 @@ function getDropdownQuestion($name, $question) {
         $tag = isset($tag[$lang]) ? $tag[$lang] : $tag;
         $tag = htmlspecialchars($tag);
         $result .= <<<INPUT
-        <option value="{$value}">{$tag[$lang]}</option>
+        <option value="{$value}">{$tag}</option>
 INPUT;
     }
     return '<label class="control-label">'.$question['question'][$lang].':</label>&nbsp;<select class="input-xlarge" name="'.$name.'">'.$result.'</select>';
