@@ -71,9 +71,6 @@ function getTextQuestion($name, $question) {
     $result .= <<<INPUT
     <div class="well">
       <p>
-        <label for="text-content">
-          Add your own text and check the spelling:
-        </label>
       </p>
       <textarea id="textarea-content" placeholder="..." style="width:90%" rows="8" name="{$name}"></textarea>
       <div id="incorrect-word-list"></div>

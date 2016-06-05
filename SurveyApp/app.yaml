@@ -1,0 +1,37 @@
+runtime: php55
+api_version: 1
+application: surveyappcc
+
+handlers:
+- url: /
+  script: index.php
+
+- url: /index\.php*
+  script: index.php
+  
+- url: /results\.php
+  script: results.php
+
+- url: /questions\.php
+  script: questions.php
+ 
+- url: /login_form\.php
+  script: login_form.php
+  
+- url: /css
+  static_dir: css
+
+- url: /fonts
+  static_dir: fonts
+  
+- url: /img
+  static_dir: img 
+  
+- url: /js
+  static_dir: js 
+  
+- url: /speller
+  static_dir: speller
+  
+- url: /.*
+  script: index.php

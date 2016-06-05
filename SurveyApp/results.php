@@ -72,5 +72,7 @@ echo '<h1>'.$title.': '.count($data).'</h1>';
     </tbody>
 </table>
 </div>
+
+
 </body>
 </html>
