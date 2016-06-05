@@ -45,6 +45,7 @@ function getDropdownQuestion($name, $question) {
     $result = '';
     foreach ($question['variants'] as $value => $tag) {
         $tag = isset($tag[$lang]) ? $tag[$lang] : $tag;
+        $tag = htmlspecialchars($tag);
         $result .= <<<INPUT
         <option value="{$value}">{$tag}</option>
 INPUT;
