@@ -62,15 +62,7 @@ foreach ($data as $name => $question) {
 	<script src="/js/jquery-2.2.4.js"></script>
 	<script src="/js/star-rating.js"></script>
 	<script src="/js/star-rating_locale_<?php global $lang; echo $lang;?>.js"></script>
-	<script type="text/javascript" src="speller/spell.js"></script>
-	<script type="text/javascript">
-	var speller = new Speller({ url:"speller", lang:"en", options:Speller.IGNORE_URLS });
-	 
-	function spellCheck() {
-		var form = document.forms["myform"];
-		speller.check([ form.ctrl_1, form.ctrl_2, ..., form.ctrl_N ]);
-	}
-	</script>
+	<script src="/spellcheck/spellcheck_locale_<?php global $lang; echo $lang;?>.js"></script>
 </body>
 </html>
 
