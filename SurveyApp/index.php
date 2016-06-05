@@ -21,9 +21,9 @@ if (array_key_exists('ok', $_POST)) {
     die();
 }
 if ($lang == 'ru') {
-	$title = '';
+	$title = 'Пожалуйста, оцените дизайн веб-сервиса, разрабатываемого командой Контур';
 } else {
-	$title = '';
+	$title = 'Please, evaluate design of web-service of Kontur team';
 }
 $data = json_decode(file_get_contents(FILE_NAME), true);
 $label = $lang == 'ru' ? 'Язык' : 'Language';
@@ -52,6 +52,7 @@ foreach ($data as $name => $question) {
 <body>
 <div class="container bs-docs-container"> 
 <h1><?php echo $title;?></h1>
+<h3><a href="http:\\documents.kontur.ru">www.documents.kontur.ru</a></h3>
 <form name="myform" method="POST" action="">
     <?php echo $body; ?>
     <br/>
