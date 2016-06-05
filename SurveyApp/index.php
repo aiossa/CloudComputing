@@ -53,7 +53,7 @@ foreach ($data as $name => $question) {
 <form name="myform" method="POST" action="">
     <?php echo $body; ?>
     <br/>
-    <input class="btn btn-success" type="submit" value="OK" name="ok">
+    <input class="btn btn-success" type="submit" value="OK" name="ok" disabled="disabled">
 </form> 
 </div>
 	<script src="/js/jquery-2.2.4.js"></script>
@@ -67,6 +67,52 @@ foreach ($data as $name => $question) {
             speller.check([ document.forms[0].comment ]);
             e.preventDefault();
         });
+
+        var elementIds = [];
+
+        <?php
+        foreach ($data as $name => $question) {
+            echo 'elementIds.push("' . $name . '");';
+        }
+        ?>
+
+        for (var i = 0; i < elementIds.length; i++) {
+            var elementName = elementIds[i],
+                el = $('.' + elementName);
+
+            if (elementName == 'comment') {
+                el.keyup(function() {
+                    checkSubmitAllowed($(this));
+                });
+            } else {
+                el.change(function() {
+                    checkSubmitAllowed($(this));
+                });
+            }
+        }
+
+        function checkSubmitAllowed() {
+            for (var i = 0; i < elementIds.length; i++) {
+                var elementName = elementIds[i],
+                    el = $('.' + elementName);
+                if (elementName == 'comment') {
+                    if (el.val() == '' || el.val() == 'undefined') {
+                        $('.btn-success').prop('disabled', true);
+                        return;
+                    }
+                }
+
+                if (elementName == 'sex' || elementName == 'logo') {
+                    if (!el.is(':checked')) {
+                        $('.btn-success').prop('disabled', true);
+                        return;
+                    }
+                }
+
+            }
+            $('.btn-success').prop('disabled', false);
+        }
+
     </script>
 
 </body>

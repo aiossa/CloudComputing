@@ -33,7 +33,7 @@ function getRadioQuestion($name, $question) {
     $result =  '<label class="control-label">'.$question['question'][$lang].':</label>&nbsp;' ;
     foreach ($question['variants'] as $value => $tag) {
         $result .= <<<INPUT
-<div class="radio"><label><input type="radio" name="{$name}" value="{$value}"> {$tag[$lang]} </label>
+<div class="radio"><label><input type="radio" class="{$name}" name="{$name}" value="{$value}"> {$tag[$lang]} </label>
 </div> 
 INPUT;
     }
@@ -51,14 +51,14 @@ function getDropdownQuestion($name, $question) {
         <option value="{$value}">{$tag}</option>
 INPUT;
     }
-    return '<label class="control-label">'.$question['question'][$lang].':</label>&nbsp;<select class="input-xlarge" name="'.$name.'">'.$result.'</select>';
+    return '<label class="control-label">'.$question['question'][$lang].':</label>&nbsp;<select class="input-xlarge '.$name.'" name="'.$name.'">'.$result.'</select>';
 }
 
 function getRatingQuestion($name, $question) {
     global $lang;
     return <<<RESULT
 <div class="component"><div class="control-group"><label class="control-label">{$question['question'][$lang]}</label><br/>
-<input id="input-id" name="{$name}" class="rating" value=10 type="number" class="rating" data-language="{$lang}" min=0 max={$question['variants']} step=1 data-size="lg" data-stars="{$question['variants']}">
+<input id="input-id" name="{$name}" class="rating {$name}" value=10 type="number" data-language="{$lang}" min=0 max={$question['variants']} step=1 data-size="lg" data-stars="{$question['variants']}">
 </div></div>
 RESULT;
 }
@@ -72,7 +72,7 @@ function getTextQuestion($name, $question) {
     <div class="well">
       <p>
       </p>
-      <textarea id="textarea-content" placeholder="..." style="width:90%" rows="8" name="{$name}"></textarea>
+      <textarea id="textarea-content" class="{$name}" placeholder="..." style="width:90%" rows="8" name="{$name}"></textarea>
       <div id="incorrect-word-list"></div>
     </div>
     <div class="form-actions">
