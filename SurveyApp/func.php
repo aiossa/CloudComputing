@@ -67,8 +67,22 @@ function getTextQuestion($name, $question) {
 
     global $lang;
     $result = '<label class="control-label">'.$question['question'][$lang].'</label>';
+    $caption = $lang == 'ru' ? 'Проверка правописания' : 'Spell checking';
     $result .= <<<INPUT
-    <div class="controls"><textarea name="{$name}"></textarea></div>
+    <div class="well">
+      <p>
+        <label for="text-content">
+          Add your own text and check the spelling:
+        </label>
+      </p>
+      <textarea id="textarea-content" placeholder="..." style="width:90%" rows="8" name="{$name}"></textarea>
+      <div id="incorrect-word-list"></div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary btn-large" id="check-spelling">
+        {$caption}
+      </button>
+    </div>
 INPUT;
 
     return '<div class="component"><div class="control-group">'.$result.'</div></div>';

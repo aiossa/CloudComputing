@@ -36,18 +36,15 @@ foreach ($data as $name => $question) {
 <html>
 <head>
     <meta charset="utf-8">
-<!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    
+
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootsnipp.min.css?ver=7d23ff901039aef6293954d33d23c066">
 	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link href="/css/docs.min.css" rel="stylesheet">
 	<link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
-	
+
 </head>
 <body>
 <div class="container bs-docs-container"> 
@@ -62,7 +59,16 @@ foreach ($data as $name => $question) {
 	<script src="/js/jquery-2.2.4.js"></script>
 	<script src="/js/star-rating.js"></script>
 	<script src="/js/star-rating_locale_<?php global $lang; echo $lang;?>.js"></script>
-	<script src="/spellcheck/spellcheck_locale_<?php global $lang; echo $lang;?>.js"></script>
+    <script type="text/javascript" src="/js/spell/spell.js"></script>
+    <script type="text/javascript">
+        var speller = new Speller({ url: "/js/spell", lang: "<?php echo $lang;?>", options: Speller.IGNORE_URLS });
+
+        $('#check-spelling').click(function spellCheck(e) {
+            speller.check([ document.forms[0].comment ]);
+            e.preventDefault();
+        });
+    </script>
+
 </body>
 </html>
 
