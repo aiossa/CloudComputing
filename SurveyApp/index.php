@@ -20,6 +20,11 @@ if (array_key_exists('ok', $_POST)) {
     }
     die();
 }
+if ($lang == 'ru') {
+	$title = '';
+} else {
+	$title = '';
+}
 $data = json_decode(file_get_contents(FILE_NAME), true);
 $label = $lang == 'ru' ? 'Язык' : 'Language';
 $body = '<label class="control-label">'.$label .'</label>'. ': <label class="control-label"><a href="/?lang=ru">Русский</a></label> | <label class="control-label"><a href="/?lang=en">English</a></label>';
@@ -43,13 +48,11 @@ foreach ($data as $name => $question) {
 	<link href="/css/docs.min.css" rel="stylesheet">
 	<link href="/css/star-rating.css" media="all" rel="stylesheet" type="text/css" />
 	
-	<!--,<link href="/css/theme-krajee-svg.css" media="all" rel="stylesheet" type="text/css" />-->
- 
-	
 </head>
 <body>
 <div class="container bs-docs-container"> 
-<form method="POST" action="">
+<h1><?php echo $title;?></h1>
+<form name="myform" method="POST" action="">
     <?php echo $body; ?>
     <br/>
     <input class="btn btn-success" type="submit" value="OK" name="ok">
@@ -58,6 +61,15 @@ foreach ($data as $name => $question) {
 	<script src="/js/jquery-2.2.4.js"></script>
 	<script src="/js/star-rating.js"></script>
 	<script src="/js/star-rating_locale_<?php global $lang; echo $lang;?>.js"></script>
+	<script type="text/javascript" src="speller/spell.js"></script>
+	<script type="text/javascript">
+	var speller = new Speller({ url:"speller", lang:"en", options:Speller.IGNORE_URLS });
+	 
+	function spellCheck() {
+		var form = document.forms["myform"];
+		speller.check([ form.ctrl_1, form.ctrl_2, ..., form.ctrl_N ]);
+	}
+	</script>
 </body>
 </html>
 
