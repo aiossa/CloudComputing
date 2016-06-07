@@ -29,8 +29,8 @@
 	"design": {
 		"type": "rating",
 		"question": {
-			"ru": "Оцените дизайн текущей страницы",
-			"en": "Estimate usability of page design"
+			"ru": "Сколько котиков(выбери звездочки!)",
+			"en": "What is the right number of cats (choose stars)?"
 		},
 		"variants": 10
 	},
@@ -62,8 +62,8 @@
 	"comment": {
 		"type": "text",
 		"question": {
-			"ru": "Дополнительный комментарий",
-			"en": "Additional comment"
+			"ru": "Как зовут котика?",
+			"en": "What is the name for the cat?"
 		}
 	}
 }
