@@ -16,20 +16,17 @@ if (!@$_SESSION['questions']) {
 
 $file = FILE_NAME;
 
-$data = '[]';
-
 if (array_key_exists('file', $_POST)) {
     $post = $_POST['file'];
     if (isJson($post)) {
-        file_put_contents($file, $post);
+        saveQuestions($post);
     } else {
         echo '<H1>Error parsing json. Please, check again</H1>';
     }
     $data = $post;
-} elseif (file_exists($file)) {
-    $data = file_get_contents($file);
+} else {
+    $data = getRawQuestions();
 }
-
 ?>
 <html>
 <head>

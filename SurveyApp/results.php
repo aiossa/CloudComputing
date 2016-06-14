@@ -16,13 +16,9 @@ if (!@$_SESSION['results']) {
 }
 $file = FILE_RESULTS;
 
-$data = [];
+$data = getResults();
 
-if (file_exists($file)) {
-    $data = explode(PHP_EOL, file_get_contents($file));
-}
-
-$questions = json_decode(file_get_contents(FILE_NAME), true);
+$questions = getQuestions();
 $title = $lang == 'ru' ? 'Всего проголосовало' : 'Total answers';
 echo '<h1>'.$title.': '.count($data).'</h1>';
 ?>
@@ -50,7 +46,6 @@ echo '<h1>'.$title.': '.count($data).'</h1>';
     <?php
     $sums = [];
     foreach ($data as $row) {
-        $row = json_decode($row, true);
         unset($row['ok']);
         echo '<tr>';
         foreach ($row as $questionKey => $questionAnswer) {

@@ -1,16 +1,73 @@
 <?php
 session_start();
 
+require __DIR__.'/config.php';
+
 define ('FILE_NAME', __DIR__.'/questions.json');
 define ('FILE_RESULTS', __DIR__.'/results.json');
 
-global $lang;
+global $lang, $pdo;
+
+$params = [
+    'dbname' . '=' . DB_NAME,
+    'host' . '=' . DB_HOST,
+    'port' . '=3306',
+    'charset' . '=' . 'utf8'
+];
+
+$pdo = new \PDO(
+    'mysql:' . implode(';', $params),
+    DB_USER,
+    DB_PASSWORD
+);
+
 $lang = @$_GET['lang'];
 $lang = $lang ?: 'en';
 
 function isJson($string) {
     json_decode($string);
     return (json_last_error() === JSON_ERROR_NONE);
+}
+
+function addResult($result) {
+    global $pdo;
+    $sql = 'INSERT INTO results (`timestamp`, `data`) VALUES (:timestamp, :data)';
+    $stmt = $pdo->prepare($sql);
+    $time = time();
+    $stmt->bindParam('timestamp', $time);
+    $stmt->bindParam('data', $result);
+    $stmt->execute();
+}
+
+function getResults() {
+    global $pdo;
+    $sql = 'SELECT * FROM results';
+    $stmt = $pdo->query($sql);
+    $data = [];
+    while($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+        $data[] = json_decode($row['data'], true);
+    }
+    return $data;
+}
+
+function saveQuestions($questions) {
+    global $pdo;
+    $sql = 'UPDATE questions SET data = :data';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam('data', $questions);
+    $stmt->execute();
+}
+
+function getQuestions() {
+    return json_decode(getRawQuestions(), true);
+}
+
+function getRawQuestions() {
+    global $pdo;
+    $sql = 'SELECT data FROM questions';
+    $stmt = $pdo->query($sql);
+    $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+    return $row['data'];
 }
 
 function getQuestionBody($name, $question) {

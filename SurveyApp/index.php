@@ -1,16 +1,11 @@
 <?php
 include_once __DIR__.'/func.php';
 
+global $lang;
 if (array_key_exists('ok', $_POST)) {
-    //append to file
-    $data = '';
-    if (file_exists(FILE_RESULTS)) {
-        $data = file_get_contents(FILE_RESULTS);
-        $data .= PHP_EOL;
-    }
+
     $result = json_encode($_POST, JSON_UNESCAPED_UNICODE);
-    $data .= $result;
-    file_put_contents(FILE_RESULTS, $data);
+    addResult($result);
 
     // die
     if ($lang == 'ru') {
@@ -25,7 +20,7 @@ if ($lang == 'ru') {
 } else {
 	$title = 'Please, evaluate design of web-service of Kontur team';
 }
-$data = json_decode(file_get_contents(FILE_NAME), true);
+$data = getQuestions();
 $label = $lang == 'ru' ? 'Язык' : 'Language';
 $body = '<label class="control-label">'.$label .'</label>'. ': <label class="control-label"><a href="/?lang=ru">Русский</a></label> | <label class="control-label"><a href="/?lang=en">English</a></label>';
 foreach ($data as $name => $question) {
